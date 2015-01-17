@@ -1,20 +1,25 @@
 {% extends "layout.html" %}
 
+{% block header %}
+  <h1>Pantry</h1>
+{% endblock %}
+
 {% block content %}
   <div class="col-md-9">
     <div id="description">
-      <h4>Pantry is an app for sharing groceries with your neighbor.</h4>
+      <p class="lead">Pantry is an app for sharing groceries with your neighbor.</p>
     </div>
 
     <div>
       <br />
       <a href="register" class="btn btn-primary">Start Sharing Now</a>
+      <a href="examples" class="btn btn-default">See it in Action</a>
     </div>
 
     <hr />
   </div>
 
   <div class="col-md-3">
-    <img src="{{ url_for('static', filename='groceries.gif') }}"/>
+    <img src="{{ url_for('static', filename='groceries.gif') }}" class="img-responsive"/>
   </div>
 {% endblock %}

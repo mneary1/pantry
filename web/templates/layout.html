@@ -10,7 +10,7 @@
 
 <body>
   <div id="wrapper" class="container">
-    <nav class="navbar navbar-default">
+    <nav id="top-nav" class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
           <a class="navbar-brand" href="/">Home</a>
@@ -26,7 +26,7 @@
     </nav>
 
     <header class="page-header">
-      <h1>Pantry</h1>
+      {% block header %} {% endblock %}
     </header>
 
     <div id="content">
@@ -35,11 +35,10 @@
   </div>
 
   <footer>
-    <div class="navbar navbar-fixed-bottom">
-      <hr />
+    <nav class="navbar navbar-default navbar-fixed-bottom">
       <p>Team <i>Randomly Generated</i> - Created at <i>MHacks 5</i> - Copyright
         2015</p>
-    </div>
+    </nav>
   </footer>
 </body>
 </html>
