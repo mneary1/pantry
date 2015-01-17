@@ -131,18 +131,13 @@ def examples():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     form = LoginForm()
-    flash(form.username.data, 'error')
-    flash(form.password.data, 'error')
-    flash(form.validate(), 'error')
-    user = User.query.filter_by(username=username, password=password)
-
     if form.validate_on_submit():
         user = form.get_user()
         login_user(user)
-        flash("Logged in!")
+        flash("Logged in!", 'success')
         session['user_id'] = form.user.id
         return redirect(request.args.get("next") or url_for('dashboard'))
-    flash("No! Wrong Password! Fuck!")
+    flash("No! Wrong Password! Fuck!", 'error')
     return render_template("home.html", form=form)
 
 @app.route("/register")
@@ -178,8 +173,8 @@ def query_db(query, args=(), one=False):
     return (rv[0] if rv else None) if one else rv
 
 @login_manager.user_loader
-def load_user(userid):
-    return User.get(userid)
+def load_user(user_id):
+    return db.session.query(User).get(user_id)
 
 if __name__ == "__main__":
     app.run()

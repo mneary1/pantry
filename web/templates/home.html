@@ -2,9 +2,6 @@
 
 {% block header %}
   <h1>Pantry</h1>
-  {% if current_user.is_authenticated() %}
-    <small>Hi {{ current_user.name }}!</small>
-  {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -25,7 +22,6 @@
   <div class="col-md-3">
     <form method="post" action="login" enctype="multipart/form-data"
           class="panel panel-default">
-      {{ form.hidden_tag() }}
       <div id="login-form" class="panel-body">
         <div class="form-group">
           <label for="username">Username</label>
