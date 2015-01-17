@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  <div class="col-md-9">
+    <div id="description">
+      <h4>Pantry is an app for sharing groceries with your neighbor.</h4>
+    </div>
+
+    <div>
+      <br />
+      <a href="register" class="btn btn-primary">Start Sharing Now</a>
+    </div>
+
+    <hr />
+  </div>
+
+  <div class="col-md-3">
+    <img src="{{ url_for('static', filename='groceries.gif') }}"/>
+  </div>
+{% endblock %}
