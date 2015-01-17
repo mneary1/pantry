@@ -13,6 +13,8 @@
 		FD7727521A6A63AE00AF13E7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD7727511A6A63AE00AF13E7 /* Images.xcassets */; };
 		FD7727551A6A63AE00AF13E7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD7727531A6A63AE00AF13E7 /* LaunchScreen.xib */; };
 		FD7727611A6A63AE00AF13E7 /* PantryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7727601A6A63AE00AF13E7 /* PantryTests.swift */; };
+		FD77276B1A6A683500AF13E7 /* models.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD77276A1A6A683500AF13E7 /* models.swift */; };
+		FD77276F1A6A6DC900AF13E7 /* myViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD77276E1A6A6DC900AF13E7 /* myViewController2.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +38,8 @@
 		FD77275A1A6A63AE00AF13E7 /* PantryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PantryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD77275F1A6A63AE00AF13E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FD7727601A6A63AE00AF13E7 /* PantryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PantryTests.swift; sourceTree = "<group>"; };
+		FD77276A1A6A683500AF13E7 /* models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = models.swift; sourceTree = "<group>"; };
+		FD77276E1A6A6DC900AF13E7 /* myViewController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myViewController2.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +83,8 @@
 			children = (
 				FD77274A1A6A63AE00AF13E7 /* AppDelegate.swift */,
 				FD77274C1A6A63AE00AF13E7 /* ViewController.swift */,
+				FD77276E1A6A6DC900AF13E7 /* myViewController2.swift */,
+				FD77276A1A6A683500AF13E7 /* models.swift */,
 				FD77274E1A6A63AE00AF13E7 /* Main.storyboard */,
 				FD7727511A6A63AE00AF13E7 /* Images.xcassets */,
 				FD7727531A6A63AE00AF13E7 /* LaunchScreen.xib */,
@@ -213,6 +219,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD77274D1A6A63AE00AF13E7 /* ViewController.swift in Sources */,
+				FD77276F1A6A6DC900AF13E7 /* myViewController2.swift in Sources */,
+				FD77276B1A6A683500AF13E7 /* models.swift in Sources */,
 				FD77274B1A6A63AE00AF13E7 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -405,6 +413,7 @@
 				FD7727661A6A63AE00AF13E7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FD7727671A6A63AE00AF13E7 /* Build configuration list for PBXNativeTarget "PantryTests" */ = {
 			isa = XCConfigurationList;
@@ -413,6 +422,7 @@
 				FD7727691A6A63AE00AF13E7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
