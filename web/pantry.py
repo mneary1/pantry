@@ -1,7 +1,7 @@
 import os, sqlite3
 from flask import Flask, url_for, render_template, request, redirect, session, abort, flash, g
 from flask.ext import login
-from flask.ext.login import LoginManager, login_user
+from flask.ext.login import LoginManager, login_user, logout_user
 from flask.ext.security import login_required
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.wtf import Form
@@ -129,7 +129,7 @@ def examples():
     return render_template('examples.html')
 
 @app.route("/login", methods=["GET", "POST"])
-def login():
+def login(form=None):
     form = LoginForm()
     if form.validate_on_submit():
         user = form.get_user()
@@ -139,6 +139,13 @@ def login():
         return redirect(request.args.get("next") or url_for('dashboard'))
     flash("No! Wrong Password! Fuck!", 'error')
     return render_template("home.html", form=form)
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    flash("Logged out!", 'success')
+    return render_template("home.html")
 
 @app.route("/register")
 def register():
