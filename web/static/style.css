@@ -6,6 +6,11 @@ body {
   margin-right: 5px;
 }
 
+.error {
+  font-size: 20px;
+  color: red;
+}
+
 img {
   margin: 10px;
 }
@@ -17,6 +22,12 @@ footer {
 footer nav p {
   margin: 15px;
 }
+
+.success {
+  font-size: 20px;
+  color: green;
+}
+
 
 #top-nav {
   margin-top: 10px;
