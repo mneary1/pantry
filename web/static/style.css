@@ -1,9 +1,23 @@
+body {
+  padding-bottom: 70px;
+}
+
+.btn {
+  margin-right: 5px;
+}
+
 img {
-  max-height: 100%;
-  max-width: 100%;
   margin: 10px;
 }
 
 footer {
   text-align: center;
+}
+
+footer nav p {
+  margin: 15px;
+}
+
+#top-nav {
+  margin-top: 10px;
 }
