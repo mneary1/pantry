@@ -8,7 +8,7 @@
 
 import UIKit
 
-class myViewController2: UIViewController {
+class myViewController2: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +36,11 @@ class myViewController2: UIViewController {
         }
         
         
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
     override func didReceiveMemoryWarning() {

@@ -12,6 +12,8 @@
 	<dict>
 		<key>8FE83B7E6D9D71B86088ABCDDDCC25ABF3223B91</key>
 		<string>https://github.com/mneary1/pantry.git</string>
+		<key>910A3B3A1D352F7A0B5C487506E17B8D6367FF66</key>
+		<string>github.com:nerdyc/Squeal.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>ios/Pantry/Pantry.xcodeproj</string>
@@ -19,6 +21,8 @@
 	<dict>
 		<key>8FE83B7E6D9D71B86088ABCDDDCC25ABF3223B91</key>
 		<string>../../../..</string>
+		<key>910A3B3A1D352F7A0B5C487506E17B8D6367FF66</key>
+		<string>../../../../ios/Pantry/Externals/Squeal/</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/mneary1/pantry.git</string>
@@ -35,6 +39,14 @@
 			<string>8FE83B7E6D9D71B86088ABCDDDCC25ABF3223B91</string>
 			<key>IDESourceControlWCCName</key>
 			<string>pantry</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>910A3B3A1D352F7A0B5C487506E17B8D6367FF66</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Squeal</string>
 		</dict>
 	</array>
 </dict>

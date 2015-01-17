@@ -15,6 +15,11 @@
 		FD7727611A6A63AE00AF13E7 /* PantryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7727601A6A63AE00AF13E7 /* PantryTests.swift */; };
 		FD77276B1A6A683500AF13E7 /* models.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD77276A1A6A683500AF13E7 /* models.swift */; };
 		FD77276F1A6A6DC900AF13E7 /* myViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD77276E1A6A6DC900AF13E7 /* myViewController2.swift */; };
+		FD7727711A6AD98000AF13E7 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FD7727701A6AD98000AF13E7 /* libsqlite3.dylib */; };
+		FD77279A1A6ADDD000AF13E7 /* Squeal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD77278F1A6ADDB200AF13E7 /* Squeal.framework */; };
+		FD77279D1A6AE0F600AF13E7 /* Squeal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD77278F1A6ADDB200AF13E7 /* Squeal.framework */; };
+		FD77279E1A6AE0F600AF13E7 /* Squeal.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD77278F1A6ADDB200AF13E7 /* Squeal.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FD7727A31A6AE5FA00AF13E7 /* groceries.gif in Resources */ = {isa = PBXBuildFile; fileRef = FD7727A21A6AE5FA00AF13E7 /* groceries.gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,7 +30,77 @@
 			remoteGlobalIDString = FD7727441A6A63AE00AF13E7;
 			remoteInfo = Pantry;
 		};
+		FD77278E1A6ADDB200AF13E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FD7727831A6ADDB100AF13E7 /* Squeal.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD7247F71996880300151E1E;
+			remoteInfo = "Squeal-OSX";
+		};
+		FD7727901A6ADDB200AF13E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FD7727831A6ADDB100AF13E7 /* Squeal.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD7248021996880300151E1E;
+			remoteInfo = "Squeal-OSXTests";
+		};
+		FD7727921A6ADDB200AF13E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FD7727831A6ADDB100AF13E7 /* Squeal.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CDCBEB4C19C5F6F500862BFD;
+			remoteInfo = "Squeal-iOS";
+		};
+		FD7727941A6ADDB200AF13E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FD7727831A6ADDB100AF13E7 /* Squeal.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CDCBEB5619C5F6F500862BFD;
+			remoteInfo = "Squeal-iOSTests";
+		};
+		FD7727961A6ADDB200AF13E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FD7727831A6ADDB100AF13E7 /* Squeal.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CD3DE27919BCD44B00DED437;
+			remoteInfo = "SquealSpecHelpers-OSX";
+		};
+		FD7727981A6ADDB200AF13E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FD7727831A6ADDB100AF13E7 /* Squeal.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CDCBEB7019C5F77900862BFD;
+			remoteInfo = "SquealSpecHelpers-iOS";
+		};
+		FD77279B1A6AE0C800AF13E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FD7727831A6ADDB100AF13E7 /* Squeal.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = CDCBEB4B19C5F6F500862BFD;
+			remoteInfo = "Squeal-iOS";
+		};
+		FD77279F1A6AE0F600AF13E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FD7727831A6ADDB100AF13E7 /* Squeal.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = CD7247F61996880300151E1E;
+			remoteInfo = "Squeal-OSX";
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FD7727A11A6AE0F600AF13E7 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				FD77279E1A6AE0F600AF13E7 /* Squeal.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		FD7727451A6A63AE00AF13E7 /* Pantry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pantry.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -40,6 +115,9 @@
 		FD7727601A6A63AE00AF13E7 /* PantryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PantryTests.swift; sourceTree = "<group>"; };
 		FD77276A1A6A683500AF13E7 /* models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = models.swift; sourceTree = "<group>"; };
 		FD77276E1A6A6DC900AF13E7 /* myViewController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myViewController2.swift; sourceTree = "<group>"; };
+		FD7727701A6AD98000AF13E7 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		FD7727831A6ADDB100AF13E7 /* Squeal.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Squeal.xcodeproj; path = Externals/Squeal/Squeal.xcodeproj; sourceTree = "<group>"; };
+		FD7727A21A6AE5FA00AF13E7 /* groceries.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = groceries.gif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +125,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD77279A1A6ADDD000AF13E7 /* Squeal.framework in Frameworks */,
+				FD77279D1A6AE0F600AF13E7 /* Squeal.framework in Frameworks */,
+				FD7727711A6AD98000AF13E7 /* libsqlite3.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +144,8 @@
 		FD77273C1A6A63AE00AF13E7 = {
 			isa = PBXGroup;
 			children = (
+				FD7727831A6ADDB100AF13E7 /* Squeal.xcodeproj */,
+				FD7727701A6AD98000AF13E7 /* libsqlite3.dylib */,
 				FD7727471A6A63AE00AF13E7 /* Pantry */,
 				FD77275D1A6A63AE00AF13E7 /* PantryTests */,
 				FD7727461A6A63AE00AF13E7 /* Products */,
@@ -86,6 +169,7 @@
 				FD77276E1A6A6DC900AF13E7 /* myViewController2.swift */,
 				FD77276A1A6A683500AF13E7 /* models.swift */,
 				FD77274E1A6A63AE00AF13E7 /* Main.storyboard */,
+				FD7727A21A6AE5FA00AF13E7 /* groceries.gif */,
 				FD7727511A6A63AE00AF13E7 /* Images.xcassets */,
 				FD7727531A6A63AE00AF13E7 /* LaunchScreen.xib */,
 				FD7727481A6A63AE00AF13E7 /* Supporting Files */,
@@ -118,6 +202,19 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		FD7727841A6ADDB100AF13E7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FD77278F1A6ADDB200AF13E7 /* Squeal.framework */,
+				FD7727911A6ADDB200AF13E7 /* Squeal-OSXTests.xctest */,
+				FD7727931A6ADDB200AF13E7 /* Squeal.framework */,
+				FD7727951A6ADDB200AF13E7 /* Squeal-iOSTests.xctest */,
+				FD7727971A6ADDB200AF13E7 /* SquealSpecHelpers.framework */,
+				FD7727991A6ADDB200AF13E7 /* SquealSpecHelpers.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -128,10 +225,13 @@
 				FD7727411A6A63AE00AF13E7 /* Sources */,
 				FD7727421A6A63AE00AF13E7 /* Frameworks */,
 				FD7727431A6A63AE00AF13E7 /* Resources */,
+				FD7727A11A6AE0F600AF13E7 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				FD77279C1A6AE0C800AF13E7 /* PBXTargetDependency */,
+				FD7727A01A6AE0F600AF13E7 /* PBXTargetDependency */,
 			);
 			name = Pantry;
 			productName = Pantry;
@@ -185,6 +285,12 @@
 			mainGroup = FD77273C1A6A63AE00AF13E7;
 			productRefGroup = FD7727461A6A63AE00AF13E7 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = FD7727841A6ADDB100AF13E7 /* Products */;
+					ProjectRef = FD7727831A6ADDB100AF13E7 /* Squeal.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				FD7727441A6A63AE00AF13E7 /* Pantry */,
@@ -193,11 +299,57 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		FD77278F1A6ADDB200AF13E7 /* Squeal.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Squeal.framework;
+			remoteRef = FD77278E1A6ADDB200AF13E7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FD7727911A6ADDB200AF13E7 /* Squeal-OSXTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Squeal-OSXTests.xctest";
+			remoteRef = FD7727901A6ADDB200AF13E7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FD7727931A6ADDB200AF13E7 /* Squeal.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Squeal.framework;
+			remoteRef = FD7727921A6ADDB200AF13E7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FD7727951A6ADDB200AF13E7 /* Squeal-iOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Squeal-iOSTests.xctest";
+			remoteRef = FD7727941A6ADDB200AF13E7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FD7727971A6ADDB200AF13E7 /* SquealSpecHelpers.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SquealSpecHelpers.framework;
+			remoteRef = FD7727961A6ADDB200AF13E7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FD7727991A6ADDB200AF13E7 /* SquealSpecHelpers.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SquealSpecHelpers.framework;
+			remoteRef = FD7727981A6ADDB200AF13E7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		FD7727431A6A63AE00AF13E7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD7727A31A6AE5FA00AF13E7 /* groceries.gif in Resources */,
 				FD7727501A6A63AE00AF13E7 /* Main.storyboard in Resources */,
 				FD7727551A6A63AE00AF13E7 /* LaunchScreen.xib in Resources */,
 				FD7727521A6A63AE00AF13E7 /* Images.xcassets in Resources */,
@@ -240,6 +392,16 @@
 			isa = PBXTargetDependency;
 			target = FD7727441A6A63AE00AF13E7 /* Pantry */;
 			targetProxy = FD77275B1A6A63AE00AF13E7 /* PBXContainerItemProxy */;
+		};
+		FD77279C1A6AE0C800AF13E7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Squeal-iOS";
+			targetProxy = FD77279B1A6AE0C800AF13E7 /* PBXContainerItemProxy */;
+		};
+		FD7727A01A6AE0F600AF13E7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Squeal-OSX";
+			targetProxy = FD77279F1A6AE0F600AF13E7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -344,6 +506,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Pantry/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -354,6 +517,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Pantry/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -10,7 +10,7 @@ import UIKit
 
 
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +36,12 @@ class ViewController: UIViewController {
         let view2 = self.storyboard?.instantiateViewControllerWithIdentifier("view2") as myViewController2
         self.navigationController?.pushViewController(view2, animated: true)
     }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
