@@ -147,9 +147,28 @@ def logout():
     flash("Logged out!", 'success')
     return render_template("home.html")
 
-@app.route("/register")
+@app.route("/register", methods=["GET", "POST"])
 def register():
-    return render_template('register.html')
+    if(request.method == 'GET'):
+        return render_template('register.html')
+    else:
+        username = request.form['username']
+        password = request.form['password']
+        realname = request.form['realname']
+        address = request.form['address']
+        email = request.form['email']
+
+        data = [username, password, realname, address, email]
+        if any(not field for field in data):
+            flash("Everything is required! Everything! Do it over!", 'error')
+            return render_template('register.html')
+
+        new_guy = User(*data)
+        db.session.add(new_guy)
+        db.session.commit()
+
+        flash("That's pretty much it. You're registered. Have fun!", 'success')
+        return render_template('dashboard.html')
 
 @app.teardown_appcontext
 def close_db(error):
