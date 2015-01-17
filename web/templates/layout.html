@@ -19,11 +19,22 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
             <li><a href="examples">Examples</a></li>
-            <li><a href="register">Register</a></li>
+            {% if current_user.is_authenticated() %}
+              <li><a href="logout">Logout</a></li>
+            {% else %}
+              <li><a href="register">Register</a></li>
+              <li><a href="login">Login</a></li>
+            {% endif %}
           </ul>
         </div>
       </div>
     </nav>
+
+    {% block flashed %}
+      {% for category, message in get_flashed_messages(with_categories=true) %}
+        <div class="flash {{category}}">{{ message }}</div>
+      {% endfor %}
+    {% endblock %}
 
     <header class="page-header">
       {% block header %} {% endblock %}
