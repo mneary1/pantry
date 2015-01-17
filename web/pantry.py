@@ -51,7 +51,7 @@ class User(db.Model):
         return self.password == other_pass
 
     def is_authenticated(self):
-        return True
+        return session['user_id'] == self.id
 
     def is_active(self):
         return True
@@ -96,9 +96,9 @@ class LoginForm(Form):
         self.user = None
 
     def validate(self):
-        rv = Form.validate(self)
-        if not rv:
-            return False
+        # rv = Form.validate(self)
+        # if not rv:
+        #     return False
 
         user = User.query.filter_by(username=self.username.data).first()
 
