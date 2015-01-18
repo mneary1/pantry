@@ -1,4 +1,4 @@
-import os, sqlite3, math
+import os, sqlite3, math, requests
 from flask import Flask, url_for, render_template, request, redirect, session, abort, flash, g
 from flask.ext import login
 from flask.ext.login import LoginManager, login_user, logout_user, current_user
@@ -29,6 +29,8 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 
 PER_PAGE = 10
+
+venmo_api_code = ''
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -128,6 +130,7 @@ class LoginForm(Form):
 
 @app.route("/")
 def pantry():
+    print request.path
     return render_template('home.html')
 
 @app.route("/add_to_pantry", methods=["POST"])
@@ -257,6 +260,32 @@ def register():
 
         flash("That's pretty much it. You're registered. Have fun!", 'success')
         return render_template('home.html')
+
+@app.route('/venmo')
+def venmo_login():
+    return redirect('https://api.venmo.com/v1/oauth/authorize?client_id=2284&response_type=code&scope=make_payments')
+
+@app.route('/venmo2')
+def venmo_connect():
+    try:
+        venmo_api_code = request.args.get('code')
+    except:
+        flash("Venmo API Connect failed.")
+        return redirect('/')
+
+    data = {}
+    data ['client_id'] = '2284'
+    data ['client_secret'] = '4L23sdF428pwBQYrMe3UQKrdQpdC4GvC'
+    data ['code'] = venmo_api_code
+    data ['scope'] = 'make_payments'
+
+    url = 'https://api.venmo.com/v1/oauth/access_token'
+
+    response = requests.post(url,data)
+
+    print response.json()
+
+    return redirect('/')
 
 def url_for_other_page(page):
     args = request.view_args.copy()
