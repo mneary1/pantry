@@ -1,4 +1,4 @@
-import os, sqlite3
+import os, sqlite3, math
 from flask import Flask, url_for, render_template, request, redirect, session, abort, flash, g
 from flask.ext import login
 from flask.ext.login import LoginManager, login_user, logout_user, current_user
@@ -7,6 +7,7 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.wtf import Form
 from wtforms.fields import TextField, PasswordField
 from wtforms.validators import *
+from pygeocoder import Geocoder
 
 app = Flask(__name__)
 app.config.from_object(__name__)
@@ -38,6 +39,8 @@ class User(db.Model):
     points = db.Column(db.Integer)
     num_given = db.Column(db.Integer)
     num_bought = db.Column(db.Integer)
+    geo_x = db.Column(db.Float)
+    geo_y = db.Column(db.Float)
     created_at = db.Column(db.TIMESTAMP)
 
     def __init__(self, username, password, real_name, address, email):
@@ -46,6 +49,10 @@ class User(db.Model):
         self.real_name = real_name
         self.address = address
         self.email = email
+
+        geo_results = Geocoder.geocode(self.address)
+        self.geo_x = geo_results[0].coordinates[0]
+        self.geo_y = geo_results[0].coordinates[1]
 
     def check_password(self, other_pass):
         return self.password == other_pass
@@ -121,10 +128,21 @@ def pantry():
 
 @app.route("/dashboard")
 @login_required
-def dashboard(users=None, user_pantry=None):
-    users = User.query.order_by(User.username)
-    user_pantry = current_user.items_available.split(',')
-    return render_template('dashboard.html', users=users, user_pantry=user_pantry)
+def dashboard(users=[], user_pantry=[], geo_info=[]):
+    if current_user.items_available:
+        user_pantry = current_user.items_available.split(',')
+
+    # addresses = [user.adresss for user in users]
+    # geocodes = [Geocoder.geocode(address) for address in addresses]
+    cx, cy = current_user.geo_x, current_user.geo_y
+    users = User.query.order_by('abs(geo_x - {}) + abs(geo_y - {})'.format(cx, cy))
+
+    names = [user.real_name for user in users]
+    dists = [round(haversine_miles(user.geo_x, user.geo_y, cx, cy), 2) for user in users]
+    geo_info = {name:dist for (name, dist) in zip(names, dists)}
+
+    return render_template('dashboard.html', users=users, \
+            user_pantry=user_pantry, geo_info = geo_info)
 
 @app.route("/examples")
 def examples():
@@ -172,7 +190,7 @@ def register():
         db.session.commit()
 
         flash("That's pretty much it. You're registered. Have fun!", 'success')
-        return render_template('dashboard.html')
+        return render_template('home.html')
 
 @app.teardown_appcontext
 def close_db(error):
@@ -201,6 +219,24 @@ def query_db(query, args=(), one=False):
     rv = cur.fetchall()
     cur.close()
     return (rv[0] if rv else None) if one else rv
+
+# Calculates the distance (in miles) between two geo coordinates.
+# http://stackoverflow.com/questions/365826/calculate-distance-between-2-gps-coordinates
+def haversine_miles(lat1, lon1, lat2, lon2):
+    R = 3956;
+    dLat = to_rad(lat2-lat1)
+    dLon = to_rad(lon2-lon1)
+    lat1 = to_rad(lat1)
+    lat2 = to_rad(lat2)
+
+    a = math.sin(dLat/2) * math.sin(dLat/2) + \
+            math.sin(dLon/2) * math.sin(dLon/2) * math.cos(lat1) * math.cos(lat2); 
+    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a)); 
+    d = R * c;
+    return d
+
+def to_rad(deg):
+    return (math.pi / 180) * deg
 
 @login_manager.user_loader
 def load_user(user_id):

@@ -17,6 +17,9 @@ create table users (
   num_given integer DEFAULT 0,
   num_bought integer DEFAULT 0,
 
+  geo_x float Default 0,
+  geo_y float Default 0,
+
   created_at timestamp DEFAULT CURRENT_TIMESTAMP
 );
 

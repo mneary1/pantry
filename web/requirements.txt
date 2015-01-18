@@ -5,3 +5,4 @@ Flask-SQLAlchemy==2.0
 Flask-WTF==0.10.3
 Jinja2==2.7.3
 WTForms==2.0.1
+pygeocoder==1.2.5

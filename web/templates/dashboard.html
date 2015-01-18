@@ -40,14 +40,16 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <td>Name</td>
-          <td>Items Available</td>
+          <td><b>Name</b></td>
+          <td><b>Distance (miles)</b></td>
+          <td><b>Items Available</b></td>
         </tr>
       </thead>
       <tbody>
-        {% for user in users %}
+        {% for user in users if user.username != current_user.username %}
           <tr>
             <td>{{ user.real_name }}</td>
+            <td>{{ geo_info[user.real_name] }}</td>
             <td>{{ user.items_available }}</td>
           </tr>
         {% endfor %}
@@ -60,14 +62,16 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <td>Name</td>
-          <td>Items Desired</td>
+          <td><b>Name</b></td>
+          <td><b>Distance (miles)</b></td>
+          <td><b>Items Desired</b></td>
         </tr>
       </thead>
       <tbody>
-        {% for user in users %}
+        {% for user in users if user.username != current_user.username %}
           <tr>
             <td>{{ user.real_name }}</td>
+            <td>{{ geo_info[user.real_name] }}</td>
             <td>{{ user.items_desired }}</td>
           </tr>
         {% endfor %}
