@@ -130,7 +130,6 @@ class LoginForm(Form):
 
 @app.route("/")
 def pantry():
-    print request.path
     return render_template('home.html')
 
 @app.route("/add_to_pantry", methods=["POST"])
@@ -261,9 +260,24 @@ def register():
         flash("That's pretty much it. You're registered. Have fun!", 'success')
         return render_template('home.html')
 
-@app.route('/venmo')
-def venmo_login():
-    return redirect('https://api.venmo.com/v1/oauth/authorize?client_id=2284&response_type=code&scope=make_payments')
+@app.route('/venmo/<info>')
+def venmo_login(info=''):
+    def buy_item():
+        name, food = info.split('-')
+        user = User.query.filter_by(username=name).first()
+        user.items_available = ','.join([a for a in \
+            user.items_available.split(',') if a != food])
+        current_user.items_desired = ','.join([a for a in \
+            current_user.items_desired.split(',') if a != food])
+        db.session.commit()
+
+    # Time to make this nicer this later.
+    if info:
+        buy_item()
+        return redirect('https://api.venmo.com/v1/oauth/authorize?client_id=2284&response_type=code&scope=make_payments')
+    else:
+        flash("Item purchasing failed.")
+        return redirect('/dashboard')
 
 @app.route('/venmo2')
 def venmo_connect():
@@ -271,7 +285,7 @@ def venmo_connect():
         venmo_api_code = request.args.get('code')
     except:
         flash("Venmo API Connect failed.")
-        return redirect('/')
+        return redirect('/dashboard')
 
     data = {}
     data ['client_id'] = '2284'
@@ -281,7 +295,7 @@ def venmo_connect():
 
     url = 'https://api.venmo.com/v1/oauth/access_token'
     response = requests.post(url,data)
-    print response.json()
+    print(response.json())
 
     flash("You successfully purchased the ingredient!",'success')
     return redirect('/dashboard')

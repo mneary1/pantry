@@ -25,8 +25,8 @@
               <td>{{ geo_info[user.real_name] }}</td>
               <td>{{ (geo_info[user.real_name] * 60 / 3.1) | round(2) }}</td>
               <td>
-                <a href="/venmo">
-                  <img src="{{ url_for('static', filename='venmologoblue.png') }}" alt = 'Venmo button' height=15%/>  
+                <a href="/venmo/{{ user.username + '-' + food }}">
+                  <img src="{{ url_for('static', filename='venmologoblue.png') }}" alt = 'Venmo button' height=15% />  
                 </a>
               </td>
             </tr>
