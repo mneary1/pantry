@@ -8,17 +8,23 @@
   <div id="my-controls" class="col-md-12 panel panel-default">
     <div id="my-pantry" class="col-md-10">
       <h3>My pantry</h3>
-      <ul>
-      {% for item in user_pantry %}
-        <li>{{ item }}</li>
-      {% endfor %}
-      </ul>
+      {% if user_pantry | length == 0 %}
+        <p class="lead">You have no food in your pantry! <a href="add">Add
+                        some</a>!</p>
+      {% else %}
+        <ul>
+          {% for item in user_pantry %}
+            <li>{{ item }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
     </div>
     <div id="my-options" class="col-md-2">
       <h3>Options</h3>
       <a href="#" class="btn btn-primary btn-block">Add Food</a>
       <a href="#" class="btn btn-default btn-block">Remove Food</a>
       <a href="#" class="btn btn-danger btn-block">Clear Inventory</a>
+      <br />
     </div>
   </div>
 
