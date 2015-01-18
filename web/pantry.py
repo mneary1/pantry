@@ -165,6 +165,12 @@ def empty_pantry():
     flash("Cleared your list!", 'success')
     return redirect(url_for('dashboard'))
 
+@app.route("/find/<food>")
+def find(users=[], food=None):
+    if food:
+        users = User.query.filter(User.items_available.contains(food)).all()
+    return render_template('find.html', users=users, food=food)
+
 @app.route("/examples")
 def examples():
     return render_template('examples.html')
