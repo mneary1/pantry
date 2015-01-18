@@ -7,22 +7,22 @@
 {% block content %}
   <div id="my-controls" class="col-md-12 panel panel-default">
     <div id="my-pantry" class="col-md-10">
-      <h3>My pantry</h3>
+      <h3>My Pantry</h3>
 
       {% if user_pantry | length == 0 %}
         <p class="lead">You have no food in your pantry! 
-          <a href="#" class="add-btn"> Add some</a>!</p>
+          <a href="#" class="add-btn-pantry"> Add some</a>!</p>
       {% else %}
         {% for item in user_pantry | sort %}
           <a href="find/{{ item }}" class="btn btn-default food-btn">{{ item }}</a></li>
         {% endfor %}
       {% endif %}
 
-      <div id="add-food" class="hidden">
+      <div id="add-food-pantry" class="hidden">
         <form action="add_to_pantry" method="post" enctype="multipart/form-data">
           <div class="form-group">
-            <label for="food-names">Food Name(s) (Comma separated)</label>
-            <input type="text" name="food-names" id="food-names"
+            <label for="food-names-pantry">Food Name(s) (Comma separated)</label>
+            <input type="text" name="food-names-pantry" id="food-names-pantry"
                    class="form-control"/>
           </div>
           <button type="submit" class="btn btn-default">Add Item(s)</button>
@@ -33,9 +33,46 @@
 
     <div id="my-options" class="col-md-2">
       <h3>Options</h3>
-      <a href="#" class="btn btn-primary btn-block add-btn">Add Food</a>
+      <a href="#" class="btn btn-primary btn-block add-btn-pantry">Add Food</a>
       <a href="#" class="btn btn-warning btn-block">Remove Food</a>
       <a href="empty_pantry" class="btn btn-danger btn-block">Clear Inventory</a>
+      <br />
+    </div>
+  </div>
+
+  <hr />
+
+  <div id="my-controls" class="col-md-12 panel panel-default">
+    <div id="my-shopping-list" class="col-md-10">
+      <h3>My Shopping List</h3>
+
+      {% if user_sl | length == 0 %}
+        <p class="lead">You have no food on your shopping list! 
+          <a href="#" class="add-btn-sl"> Add some</a>!</p>
+      {% else %}
+        {% for item in user_sl | sort %}
+          <a href="find/{{ item }}" class="btn btn-default food-btn">{{ item }}</a></li>
+        {% endfor %}
+      {% endif %}
+
+      <div id="add-food-sl" class="hidden">
+        <form action="add_to_sl" method="post" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="food-names-sl">Food Name(s) (Comma separated)</label>
+            <input type="text" name="food-names-sl" id="food-names-sl"
+                   class="form-control"/>
+          </div>
+          <button type="submit" class="btn btn-default">Add Item(s)</button>
+        </form>
+        <br />
+      </div>
+    </div>
+
+    <div id="my-options" class="col-md-2">
+      <h3>Options</h3>
+      <a href="#" class="btn btn-primary btn-block add-btn-sl">Add Food</a>
+      <a href="#" class="btn btn-warning btn-block">Remove Food</a>
+      <a href="empty_sl" class="btn btn-danger btn-block">Clear Inventory</a>
       <br />
     </div>
   </div>
@@ -67,16 +104,12 @@
       </thead>
 
       <tbody>
-        {% for user in users if user.username != current_user.username %}
+        {% for user in users if user.username != current_user.username and user.items_available %}
           <tr>
             <td>{{ user.real_name }}</td>
             <td>{{ geo_info[user.real_name] }}</td>
             <td>{{ (geo_info[user.real_name] * 60 / 3.1) | round(2) }}</td>
-            {% if user.items_available %}
-              <td>{{ user.items_available[:30] }}</td>
-            {% else %}
-              <td>None</td>
-            {% endif %}
+            <td>{{ user.items_available[:30] }}</td>
           </tr>
         {% endfor %}
       </tbody>
@@ -96,7 +129,7 @@
       </thead>
 
       <tbody>
-        {% for user in users if user.username != current_user.username %}
+        {% for user in users if user.username != current_user.username and user.items_desired %}
           <tr>
             <td>{{ user.real_name }}</td>
             <td>{{ geo_info[user.real_name] }}</td>

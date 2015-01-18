@@ -131,7 +131,7 @@ def pantry():
 
 @app.route("/add_to_pantry", methods=["POST"])
 def add_to_pantry():
-    foods = request.form['food-names']
+    foods = request.form['food-names-pantry']
     if(foods):
         foods = foods.replace(' ', '').rstrip(',')
         if current_user.items_available:
@@ -139,18 +139,35 @@ def add_to_pantry():
         else:
             current_user.items_available = foods
         db.session.commit()
-        flash("Added new foods to your list!", 'success')
+        flash("Added new foods to your pantry!", 'success')
     else:
         flash("Invalid food list supplied. Sorry.", 'error')
     return redirect(url_for('dashboard'))
 
+@app.route("/add_to_sl", methods=["POST"])
+def add_to_sl():
+    foods = request.form['food-names-sl']
+    if(foods):
+        foods = foods.replace(' ', '').rstrip(',')
+        if current_user.items_desired:
+            current_user.items_desired += ',' + foods
+        else:
+            current_user.items_desired = foods
+        db.session.commit()
+        flash("Added new foods to your shopping list!", 'success')
+    else:
+        flash("Invalid food list supplied. Sorry.", 'error')
+    return redirect(url_for('dashboard'))
 
 @app.route("/dashboard", defaults={'page':1})
 @app.route("/dashboard/<int:page>")
 @login_required
-def dashboard(users=[], user_pantry=[], geo_info=[], page=1):
+def dashboard(users=[], user_pantry=[], user_sl=[], geo_info=[], page=1):
     if current_user.items_available:
         user_pantry = current_user.items_available.split(',')
+
+    if current_user.items_desired:
+        user_sl = current_user.items_desired.split(',')
 
     cx, cy = current_user.geo_x, current_user.geo_y
     users = User.query.order_by('abs(geo_x - {}) + abs(geo_y - {})'.format(cx, cy))
@@ -163,12 +180,19 @@ def dashboard(users=[], user_pantry=[], geo_info=[], page=1):
     users = users.offset(PER_PAGE * (page - 1)).limit(PER_PAGE)
     pagination = Pagination(page, PER_PAGE, count)
     return render_template('dashboard.html', users=users, \
-            user_pantry=user_pantry, geo_info = geo_info, pagination=pagination)
+            user_pantry=user_pantry, user_sl=user_sl, geo_info = geo_info, pagination=pagination)
 
 
 @app.route("/empty_pantry")
 def empty_pantry():
     current_user.items_available = ''
+    db.session.commit()
+    flash("Cleared your list!", 'success')
+    return redirect(url_for('dashboard'))
+
+@app.route("/empty_sl")
+def empty_sl():
+    current_user.items_desired = ''
     db.session.commit()
     flash("Cleared your list!", 'success')
     return redirect(url_for('dashboard'))
