@@ -28,7 +28,7 @@ db = SQLAlchemy(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-PER_PAGE = 2
+PER_PAGE = 10
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
