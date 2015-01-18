@@ -28,7 +28,7 @@ db = SQLAlchemy(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-PER_PAGE = 10
+PER_PAGE = 2
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -271,8 +271,8 @@ def haversine_miles(lat1, lon1, lat2, lon2):
     lat2 = to_rad(lat2)
 
     a = math.sin(dLat/2) * math.sin(dLat/2) + \
-            math.sin(dLon/2) * math.sin(dLon/2) * math.cos(lat1) * math.cos(lat2); 
-    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a)); 
+            math.sin(dLon/2) * math.sin(dLon/2) * math.cos(lat1) * math.cos(lat2);
+    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a));
     d = R * c;
     return d
 
