@@ -14,7 +14,8 @@
             <td><b>Name</b></td>
             <td><b>Distance (miles)</b></td>
             <td><b>Walking time (minutes)</b></td>
-            <td><b>Buy</b></td>
+            <td><b>Email</b></td>
+            <td><b>Click to buy:</b> </td>
           </tr>
         </thead>
 
@@ -24,6 +25,7 @@
               <td>{{ user.real_name }}</td>
               <td>{{ geo_info[user.real_name] }}</td>
               <td>{{ (geo_info[user.real_name] * 60 / 3.1) | round(2) }}</td>
+              <td>{{ user.email }} </td>
               <td>
                 <a href="/venmo">
                   <img src="{{ url_for('static', filename='venmologoblue.png') }}" alt = 'Venmo button' height=15%/>  
