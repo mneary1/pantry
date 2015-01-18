@@ -113,10 +113,11 @@ class LoginForm(Form):
         user = User.query.filter_by(username=self.username.data).first()
 
         if user is None:
-            self.username.errors.append('Unknown username')
+            #self.username.errors.append('Unknown username')
+            return False
 
         if not user.check_password(self.password.data):
-            self.username.errors.append('Invalid password')
+            #self.username.errors.append('Invalid password')
             return False
 
         self.user = user
@@ -224,7 +225,7 @@ def login(form=None):
         g.user = user
         return redirect(request.args.get("next") or url_for('dashboard'))
     if(form.username.data):
-        flash("No! Wrong Password! Fuck!", 'error')
+        flash("Bad login credentials, try again!", 'error')
     return render_template("home.html", form=form)
 
 @app.route("/logout")
