@@ -5,5 +5,30 @@
 {% endblock %}
 
 {% block content %}
-  hi
+  {% if users | length != 0 %}
+    <div id="available" class="col-md-6">
+      <hr />
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <td><b>Name</b></td>
+            <td><b>Distance (miles)</b></td>
+            <td><b>Walking time (minutes)</b></td>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for user in users if user.username != current_user.username %}
+            <tr>
+              <td>{{ user.real_name }}</td>
+              <td>{{ geo_info[user.real_name] }}</td>
+              <td>{{ (geo_info[user.real_name] * 60 / 3.1) | round(2) }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    Nobody offering any {{ food }}, sorry!
+  {% endif %}
 {% endblock %}

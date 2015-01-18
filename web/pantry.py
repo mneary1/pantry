@@ -198,10 +198,16 @@ def empty_sl():
     return redirect(url_for('dashboard'))
 
 @app.route("/find/<food>")
-def find(users=[], food=None):
+def find(users=[], food=None, geo_info=[]):
     if food:
-        users = User.query.filter(User.items_available.contains(food)).all()
-    return render_template('find.html', users=users, food=food)
+        cx, cy = current_user.geo_x, current_user.geo_y
+        users = User.query.order_by('abs(geo_x - {}) + abs(geo_y - {})'.format(cx, cy)) \
+                          .filter(User.items_available.contains(food)).all()
+        names = [user.real_name for user in users]
+        dists = [round(haversine_miles(user.geo_x, user.geo_y, cx, cy), 2) for user in users]
+        geo_info = {name:dist for (name, dist) in zip(names, dists)}
+
+    return render_template('find.html', users=users, food=food, geo_info=geo_info)
 
 @app.route("/examples")
 def examples():
