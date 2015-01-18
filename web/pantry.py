@@ -280,12 +280,11 @@ def venmo_connect():
     data ['scope'] = 'make_payments'
 
     url = 'https://api.venmo.com/v1/oauth/access_token'
-
     response = requests.post(url,data)
-
     print response.json()
 
-    return redirect('/')
+    flash("You successfully purchased the ingredient!",'success')
+    return redirect('/dashboard')
 
 def url_for_other_page(page):
     args = request.view_args.copy()

@@ -6,7 +6,7 @@
 
 {% block content %}
   {% if users | length != 0 %}
-    <div id="available" class="col-md-6">
+    <div id="available" class="col-md-10">
       <hr />
       <table class="table table-striped">
         <thead>
@@ -14,6 +14,7 @@
             <td><b>Name</b></td>
             <td><b>Distance (miles)</b></td>
             <td><b>Walking time (minutes)</b></td>
+            <td><b>Buy</b></td>
           </tr>
         </thead>
 
@@ -23,6 +24,11 @@
               <td>{{ user.real_name }}</td>
               <td>{{ geo_info[user.real_name] }}</td>
               <td>{{ (geo_info[user.real_name] * 60 / 3.1) | round(2) }}</td>
+              <td>
+                <a href="/venmo">
+                  <img src="{{ url_for('static', filename='venmologoblue.png') }}" alt = 'Venmo button' height=15%/>  
+                </a>
+              </td>
             </tr>
           {% endfor %}
         </tbody>
