@@ -8,6 +8,7 @@ from flask.ext.wtf import Form
 from wtforms.fields import TextField, PasswordField
 from wtforms.validators import *
 from pygeocoder import Geocoder
+from pagination import Pagination
 
 app = Flask(__name__)
 app.config.from_object(__name__)
@@ -26,6 +27,8 @@ db = SQLAlchemy(app)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
+
+PER_PAGE = 10
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -142,9 +145,10 @@ def add_to_pantry():
     return redirect(url_for('dashboard'))
 
 
-@app.route("/dashboard")
+@app.route("/dashboard", defaults={'page':1})
+@app.route("/dashboard/<int:page>")
 @login_required
-def dashboard(users=[], user_pantry=[], geo_info=[]):
+def dashboard(users=[], user_pantry=[], geo_info=[], page=1):
     if current_user.items_available:
         user_pantry = current_user.items_available.split(',')
 
@@ -155,8 +159,12 @@ def dashboard(users=[], user_pantry=[], geo_info=[]):
     dists = [round(haversine_miles(user.geo_x, user.geo_y, cx, cy), 2) for user in users]
     geo_info = {name:dist for (name, dist) in zip(names, dists)}
 
+    count = users.count()
+    users = users.offset(PER_PAGE * (page - 1)).limit(PER_PAGE)
+    pagination = Pagination(page, PER_PAGE, count)
     return render_template('dashboard.html', users=users, \
-            user_pantry=user_pantry, geo_info = geo_info)
+            user_pantry=user_pantry, geo_info = geo_info, pagination=pagination)
+
 
 @app.route("/empty_pantry")
 def empty_pantry():
@@ -218,6 +226,12 @@ def register():
 
         flash("That's pretty much it. You're registered. Have fun!", 'success')
         return render_template('home.html')
+
+def url_for_other_page(page):
+    args = request.view_args.copy()
+    args['page'] = page
+    return url_for(request.endpoint, **args)
+app.jinja_env.globals['url_for_other_page'] = url_for_other_page
 
 @app.teardown_appcontext
 def close_db(error):
