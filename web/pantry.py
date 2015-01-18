@@ -158,6 +158,13 @@ def dashboard(users=[], user_pantry=[], geo_info=[]):
     return render_template('dashboard.html', users=users, \
             user_pantry=user_pantry, geo_info = geo_info)
 
+@app.route("/empty_pantry")
+def empty_pantry():
+    current_user.items_available = ''
+    db.session.commit()
+    flash("Cleared your list!", 'success')
+    return redirect(url_for('dashboard'))
+
 @app.route("/examples")
 def examples():
     return render_template('examples.html')
