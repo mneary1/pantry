@@ -9,8 +9,8 @@
     <div id="my-pantry" class="col-md-10">
       <h3>My pantry</h3>
       {% if user_pantry | length == 0 %}
-        <p class="lead">You have no food in your pantry! <a href="add">Add
-                        some</a>!</p>
+        <p class="lead">You have no food in your pantry! 
+          <a href="#" class="add-btn"> Add some</a>!</p>
       {% else %}
         <ul>
           {% for item in user_pantry %}
@@ -18,10 +18,21 @@
           {% endfor %}
         </ul>
       {% endif %}
+      <div id="add-food" class="hidden">
+        <form action="add_to_pantry" method="post" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="food-names">Food Name(s) (Comma separated)</label>
+            <input type="text" name="food-names" id="food-names"
+                   class="form-control"/>
+          </div>
+          <button type="submit" class="btn btn-default">Add Item(s)</button>
+        </form>
+        <br />
+      </div>
     </div>
     <div id="my-options" class="col-md-2">
       <h3>Options</h3>
-      <a href="#" class="btn btn-primary btn-block">Add Food</a>
+      <a href="#" class="btn btn-primary btn-block add-btn">Add Food</a>
       <a href="#" class="btn btn-default btn-block">Remove Food</a>
       <a href="#" class="btn btn-danger btn-block">Clear Inventory</a>
       <br />
@@ -56,7 +67,11 @@
           <tr>
             <td>{{ user.real_name }}</td>
             <td>{{ geo_info[user.real_name] }}</td>
-            <td>{{ user.items_available }}</td>
+            {% if user.items_available %}
+              <td>{{ user.items_available[:30] }}</td>
+            {% else %}
+              <td>None</td>
+            {% endif %}
           </tr>
         {% endfor %}
       </tbody>

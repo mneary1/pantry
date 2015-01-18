@@ -126,14 +126,28 @@ class LoginForm(Form):
 def pantry():
     return render_template('home.html')
 
+@app.route("/add_to_pantry", methods=["POST"])
+def add_to_pantry():
+    foods = request.form['food-names']
+    if(foods):
+        foods = foods.replace(' ', '').rstrip(',')
+        if current_user.items_available:
+            current_user.items_available += ',' + foods
+        else:
+            current_user.items_available = foods
+        db.session.commit()
+        flash("Added new foods to your list!", 'success')
+    else:
+        flash("Invalid food list supplied. Sorry.", 'error')
+    return redirect(url_for('dashboard'))
+
+
 @app.route("/dashboard")
 @login_required
 def dashboard(users=[], user_pantry=[], geo_info=[]):
     if current_user.items_available:
         user_pantry = current_user.items_available.split(',')
 
-    # addresses = [user.adresss for user in users]
-    # geocodes = [Geocoder.geocode(address) for address in addresses]
     cx, cy = current_user.geo_x, current_user.geo_y
     users = User.query.order_by('abs(geo_x - {}) + abs(geo_y - {})'.format(cx, cy))
 

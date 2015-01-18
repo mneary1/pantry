@@ -23,7 +23,8 @@
 
   <div class="col-md-3">
     {% if current_user.is_authenticated() %}
-      Hi {{ current_user.username }}!
+      Hey {{ current_user.username }}! Check out your 
+        <a href="dashboard">dashboard!</a>
     {% else %}
       <form method="post" action="login" enctype="multipart/form-data"
             class="panel panel-default">
