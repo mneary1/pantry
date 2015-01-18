@@ -1,7 +1,7 @@
 import os, sqlite3
 from flask import Flask, url_for, render_template, request, redirect, session, abort, flash, g
 from flask.ext import login
-from flask.ext.login import LoginManager, login_user, logout_user
+from flask.ext.login import LoginManager, login_user, logout_user, current_user
 from flask.ext.security import login_required
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.wtf import Form
@@ -121,8 +121,10 @@ def pantry():
 
 @app.route("/dashboard")
 @login_required
-def dashboard():
-    return render_template('dashboard.html')
+def dashboard(users=None, user_pantry=None):
+    users = User.query.order_by(User.username)
+    user_pantry = current_user.items_available.split(',')
+    return render_template('dashboard.html', users=users, user_pantry=user_pantry)
 
 @app.route("/examples")
 def examples():
@@ -136,8 +138,10 @@ def login(form=None):
         login_user(user)
         flash("Logged in!", 'success')
         session['user_id'] = form.user.id
+        g.user = user
         return redirect(request.args.get("next") or url_for('dashboard'))
-    flash("No! Wrong Password! Fuck!", 'error')
+    if(form.username.data):
+        flash("No! Wrong Password! Fuck!", 'error')
     return render_template("home.html", form=form)
 
 @app.route("/logout")

@@ -1,9 +1,77 @@
 {% extends "layout.html" %}
 
 {% block header %}
-  <h1>Pantry Dashboard</h1>
+<h1>Pantry Dashboard <small>{{ current_user.real_name }}</small></h1>
 {% endblock %}
 
 {% block content %}
-  sup
+  <div id="my-controls" class="col-md-12 panel panel-default">
+    <div id="my-pantry" class="col-md-10">
+      <h3>My pantry</h3>
+      <ul>
+      {% for item in user_pantry %}
+        <li>{{ item }}</li>
+      {% endfor %}
+      </ul>
+    </div>
+    <div id="my-options" class="col-md-2">
+      <h3>Options</h3>
+      <a href="#" class="btn btn-primary btn-block">Add Food</a>
+      <a href="#" class="btn btn-default btn-block">Remove Food</a>
+      <a href="#" class="btn btn-danger btn-block">Clear Inventory</a>
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="col-md-12">
+    <div class="col-md-6">
+      <label for="search">Search Available</label>
+      <input class="form-control" type="text" name="search-available" id="search-available" value="" />
+    </div>
+    <div class="col-md-6">
+      <label for="search">Search Desired</label>
+      <input class="form-control" type="text" name="search-desired" id="search-desired" value="" />
+    </div>
+  </div>
+
+  <div id="available" class="col-md-6">
+    <hr />
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <td>Name</td>
+          <td>Items Available</td>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+          <tr>
+            <td>{{ user.real_name }}</td>
+            <td>{{ user.items_available }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div id="desired" class="col-md-6">
+    <hr />
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <td>Name</td>
+          <td>Items Desired</td>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+          <tr>
+            <td>{{ user.real_name }}</td>
+            <td>{{ user.items_desired }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 {% endblock %}
