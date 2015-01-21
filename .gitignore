@@ -1,3 +1,4 @@
 *.un~
 /web/venv/*
 *.pyc
+.DS_STORE
